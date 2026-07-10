@@ -1,177 +1,316 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZENOX FF - Ultra Sensi Generator</title>
+    <title>ZENOX FF - Sensi Generator</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0d0d0d; color: #ffffff; padding: 15px; display: flex; flex-direction: column; align-items: center; }
-        
-        /* Top Banner */
-        .banner { background: linear-gradient(90deg, #ff3333, #b30000); width: 100%; text-align: center; padding: 10px; font-weight: bold; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; border-radius: 4px; }
-        .banner a { color: #fff; text-decoration: underline; margin-left: 10px; }
-        
-        /* Logo Header */
-        .header { width: 100%; max-width: 450px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-        .logo { font-size: 28px; font-weight: 900; color: #ff3333; letter-spacing: 2px; }
-        .menu-icon { font-size: 24px; cursor: pointer; }
-        
-        /* Main Container */
-        .card { background-color: #141414; border: 1px solid #222; border-radius: 16px; padding: 25px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); position: relative; }
-        .badge { background: linear-gradient(90deg, #ffcc00, #ff9900); color: #000; padding: 4px 20px; font-size: 11px; font-weight: bold; text-transform: uppercase; border-radius: 20px; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); }
-        
-        /* Form Styling */
-        .title-area { display: flex; align-items: center; gap: 10px; margin-top: 10px; margin-bottom: 20px; justify-content: center; }
-        .title-area h2 { font-size: 22px; font-weight: 700; }
-        .fire-icon { color: #ff5500; font-size: 22px; }
-        
-        label { display: block; font-size: 11px; font-weight: bold; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
-        
-        /* OS Buttons */
-        .os-container { display: flex; gap: 12px; margin-bottom: 20px; }
-        .os-btn { flex: 1; padding: 12px; border: 2px solid #222; background-color: #1a1a1a; color: #888; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
-        .os-btn.active { border-color: #ff3333; background-color: #ff3333; color: white; }
-        
-        /* Input Boxes */
-        input { width: 100%; padding: 14px; background-color: #1c1c1c; border: 1px solid #333; color: white; border-radius: 8px; margin-bottom: 20px; font-size: 14px; }
-        input:focus { border-color: #ff3333; outline: none; }
-        
-        /* Action Button */
-        .gen-btn { width: 100%; padding: 15px; background: linear-gradient(90deg, #ff3333, #ff5500); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255,51,51,0.3); }
-        
-        /* Results Section */
-        .results { margin-top: 25px; padding-top: 20px; border-top: 1px solid #222; display: none; }
-        .res-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #1a1a1a; align-items: center; }
-        .res-label { color: #ffcc00; font-weight: bold; }
-        .res-val { font-weight: bold; font-size: 16px; color: #00ffcc; }
+        :root {
+            --bg-color: #0d0d0d;
+            --card-bg: #141414;
+            --input-bg: #1c1c1c;
+            --accent-orange: #ff4d00;
+            --accent-red: #ff3333;
+            --text-white: #ffffff;
+            --text-gray: #888888;
+            --result-cyan: #00ffcc;
+        }
 
-        /* Range Highlight Containers */
-        .range-card { background-color: #1a1a1a; border-left: 3px solid #ff3333; padding: 10px; border-radius: 4px; margin-bottom: 12px; }
-        .range-card.mid { border-left-color: #ff9900; }
-        .range-card.long { border-left-color: #00ffcc; }
-        .range-tag { font-size: 11px; font-weight: bold; text-transform: uppercase; color: #ff3333; margin-bottom: 2px; }
-        .range-card.mid .range-tag { color: #ff9900; }
-        .range-card.long .range-tag { color: #00ffcc; }
-        .range-info { font-size: 11px; color: #aaa; line-height: 1.3; }
+        body {
+            background-color: var(--bg-color);
+            background-image: linear-gradient(rgba(13, 13, 13, 0.9), rgba(13, 13, 13, 0.95)), 
+                              url('https://wikimedia.org');
+            background-position: center 25%;
+            background-repeat: no-repeat;
+            background-size: 70% auto;
+            background-attachment: fixed;
+            color: var(--text-white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-        /* Custom styling for Hardware Settings split */
-        .hardware-box { background: #1a1a1a; border: 1px dashed #333; border-radius: 8px; padding: 12px; margin-bottom: 15px; }
+        .phone-wrapper {
+            width: 100%;
+            max-width: 412px;
+            background-color: var(--card-bg);
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-banner {
+            background: linear-gradient(90deg, #b30000, #ff1a1a);
+            text-align: center;
+            padding: 10px 5px;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .brand-title {
+            color: var(--accent-red);
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .content {
+            padding: 0 25px 30px 25px;
+            text-align: center;
+        }
+
+        .badge {
+            background-color: #ff9900;
+            color: #000;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 14px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0 0 25px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title span {
+            color: #ffcc00;
+        }
+
+        .label {
+            text-align: left;
+            font-size: 11px;
+            color: var(--text-gray);
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .os-container {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .os-btn {
+            flex: 1;
+            background-color: var(--input-bg);
+            border: 1px solid #2a2a2a;
+            color: var(--text-white);
+            padding: 14px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .os-btn.active.android {
+            background-color: #34a853;
+            border-color: #34a853;
+        }
+
+        .os-btn.active.iphone {
+            background-color: #ff334b;
+            border-color: #ff334b;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .text-input {
+            background-color: var(--input-bg);
+            border: 1px solid #2a2a2a;
+            color: var(--text-white);
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .generate-btn {
+            background: linear-gradient(180deg, #ff5500, #cc3300);
+            color: var(--text-white);
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px 0 25px 0;
+            box-shadow: 0 4px 15px rgba(204, 51, 0, 0.4);
+        }
+
+        .hint-text {
+            color: var(--accent-orange);
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        .results-box {
+            display: none;
+            text-align: left;
+            background: rgba(20, 20, 20, 0.85);
+            border-radius: 8px;
+            padding: 5px 0;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #1f1f1f;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: #ffcc00;
+        }
+
+        .result-value {
+            color: var(--result-cyan);
+            font-family: monospace;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Top Promo Banner -->
-    <div class="banner">
-        🎉 ZENOX SENSI 100K DOWNLOADS CELEBRATION! <a href="#">GET REWARDS ⚡</a>
+<div class="phone-wrapper">
+    <div class="top-banner">
+        ⚡ ZENOX SENSI 100K DOWNLOADS CELEBRATION! <span style="text-decoration: underline; cursor:pointer;">GET REWARDS ⚡</span>
     </div>
 
-    <!-- Header Block -->
     <div class="header">
-        <div class="logo">ZENOX FF</div>
+        <div class="brand-title">ZENOX FF</div>
         <div class="menu-icon">☰</div>
     </div>
 
-    <!-- Card Generator -->
-    <div class="card">
-        <div class="badge">Auto-Headshot v3.5</div>
-        
-        <div class="title-area">
-            <span class="fire-icon">⚡</span>
-            <h2>Sensi Generator</h2>
-        </div>
+    <div class="content">
+        <div class="badge">Auto-Headshot V3.2</div>
+        <h1 class="section-title"><span>⚡</span> Sensi Generator</h1>
 
-        <label>Select Device OS</label>
+        <div class="label">Select Device OS</div>
         <div class="os-container">
-            <button id="btn-android" class="os-btn active" onclick="setOS('Android')">🤖 Android</button>
-            <button id="btn-iphone" class="os-btn" onclick="setOS('iPhone')">🍏 iPhone</button>
+            <button class="os-btn android" onclick="setOS('android')">🤖 Android</button>
+            <button class="os-btn iphone active" onclick="setOS('iphone')">🍏 iPhone</button>
         </div>
 
-        <label>Device Model (e.g., Redmi Note 12)</label>
-        <input type="text" id="model" placeholder="Enter device model...">
+        <div class="input-group">
+            <div class="label">Device Model (e.g., Redmi Note 12)</div>
+            <input type="text" id="deviceModel" class="text-input" value="iPhone 13">
+        </div>
 
-        <label>Device Age (In Years)</label>
-        <input type="number" id="age" placeholder="0 for new device...">
+        <div class="input-group">
+            <div class="label">Device Age (in years)</div>
+            <input type="number" id="deviceAge" class="text-input" value="1">
+        </div>
 
-        <button class="gen-btn" onclick="generateSensi()">Generate Perfect Sensi</button>
+        <button class="generate-btn" onclick="generatePerfectSensi()">Generate Perfect Sensi</button>
 
-        <!-- Dynamic Results Output -->
-        <div class="results" id="resultsBox">
-            
-            <label style="text-align: center; display: block; margin-bottom: 10px; color: #ff3333; font-size: 12px; font-weight: bold;">
-                HARDWARE MODIFICATIONS
-            </label>
-            <!-- Hardware Output Section -->
-            <div class="hardware-box">
-                <div class="res-row"><span class="res-label">🔥 Fire Button Size:</span><span class="res-val" id="v_fire" style="color: #ff9900;">0</span></div>
-                <div class="res-row"><span class="res-label">⚙️ System DPI / Scale:</span><span class="res-val" id="v_dpi" style="color: #ffcc00;">0</span></div>
-                <div class="res-row"><span class="res-label">🎯 Headshot Accuracy Estimate:</span><span class="res-val" id="v_boost" style="color: #00ffcc;">0</span></div>
+        <div class="hint-text">
+            Recommended Macro/DPI Scale (0 - 200) for No-Recoil Headshots:<br>
+            <span style="color: #00ffcc; font-size: 12px;">[99.9% Headshot Performance Rate Active]</span>
+        </div>
+
+        <div id="results" class="results-box">
+            <div class="result-item">
+                <span class="result-label">General:</span>
+                <span id="valGeneral" class="result-value">0</span>
             </div>
-
-            <label style="text-align: center; display: block; margin-bottom: 15px; color: #ff3333; font-size: 12px; font-weight: bold;">
-                DYNAMIC RANGE AUTO-AIM MATRIX (0 - 200)
-            </label>
-
-            <!-- Combat Profiles -->
-            <div class="range-card">
-                <div class="range-tag">💥 Close-Range Auto-Aim Profile</div>
-                <div class="range-info">Bypasses body-lock friction. Requires sharp, rapid upward fire-button drags.</div>
+            <div class="result-item">
+                <span class="result-label">Red Dot:</span>
+                <span id="valRedDot" class="result-value">0</span>
             </div>
-            <div class="range-card mid">
-                <div class="range-tag">🎯 Mid-Range Steady Tracking</div>
-                <div class="range-info">Locks horizontally onto moving targets. Use moderate, smooth upward drag speed.</div>
+            <div class="result-item">
+                <span class="result-label">2x Scope:</span>
+                <span id="val2x" class="result-value">0</span>
             </div>
-            <div class="range-card long">
-                <div class="range-tag">🔭 Long-Range Zero-Drift Matrix</div>
-                <div class="range-info">Stabilises pixel-skipping over distances. Use gentle, slight upward fire-button pressure.</div>
+            <div class="result-item">
+                <span class="result-label">4x Scope:</span>
+                <span id="val4x" class="result-value">0</span>
             </div>
-
-            <div class="res-row"><span class="res-label">General:</span><span class="res-val" id="v1">0</span></div>
-            <div class="res-row"><span class="res-label">Red Dot:</span><span class="res-val" id="v2">0</span></div>
-            <div class="res-row"><span class="res-label">2x Scope:</span><span class="res-val" id="v3">0</span></div>
-            <div class="res-row"><span class="res-label">4x Scope:</span><span class="res-val" id="v4">0</span></div>
-            <div class="res-row"><span class="res-label">Sniper Scope:</span><span class="res-val" id="v5">0</span></div>
-            <div class="res-row"><span class="res-label">Free Look:</span><span class="res-val" id="v6">0</span></div>
+            <div class="result-item">
+                <span class="result-label">Sniper Scope:</span>
+                <span id="valSniper" class="result-value">0</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Free Look:</span>
+                <span id="valFreeLook" class="result-value">0</span>
+            </div>
+            <div class="result-item" style="border-top: 2px dashed #333; margin-top: 5px; padding-top: 15px;">
+                <span class="result-label" style="color: #ff334b;">Best Button Size:</span>
+                <span id="valBtnSize" class="result-value" style="color: #ffcc00;">0%</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label" style="color: #ff334b;">Optimal DPI / Scale:</span>
+                <span id="valDPI" class="result-value" style="color: #ffcc00;">0</span>
+            </div>
         </div>
     </div>
+</div>
 
-    <script>
-        let currentOS = 'Android';
+<script>
+    let selectedOS = 'iphone';
 
-        function setOS(os) {
-            currentOS = os;
-            document.getElementById('btn-android').classList.remove('active');
-            document.getElementById('btn-iphone').classList.remove('active');
-            
-            if(os === 'Android') {
-                document.getElementById('btn-android').classList.add('active');
-            } else {
-                document.getElementById('btn-iphone').classList.add('active');
-            }
-        }
+    function setOS(os) {
+        selectedOS = os;
+        document.querySelectorAll('.os-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.' + os).classList.add('active');
+    }
 
-        function generateSensi() {
-            let modelInput = document.getElementById('model').value.trim();
-            let ageInput = parseInt(document.getElementById('age').value) || 0;
-
-            if(!modelInput) { alert('Please enter your device model first!'); return; }
-
-            // Enhanced algorithm to target high-tier headshot performance
-            let ageBoost = ageInput > 1 ? (ageInput * 4) : 6;
-            let base = currentOS === 'iPhone' ? (190 + ageBoost) : (185 + ageBoost);
-            let randomMod = Math.floor(Math.random() * 4);
-
-            // General slider handles the main screen acceleration needed to break torso auto-aim
-            let general = Math.min(200, base + randomMod);
-            let redDot = Math.min(200, (base - 1) + randomMod);
-            let scope2x = Math.min(200, (base - 3) + randomMod);
-            let scope4x = Math.min(200, (base - 2) + randomMod);
-            let sniper = Math.min(200, (base - 35) + randomMod); 
-            let freeLook = Math.min(200, (base - 10) + randomMod);
-
-            let fireButtonSize;
-            let dpiDisplay;
-            let accuracyBoost;
-
-            if (currentOS === 'Android') {
+    function generatePerfectSensi() {
+        // High-level precision algorithm simulating competitive settings
+        const gen = Math.floor(Math.random() * (198 - 188 + 1)) + 188;
+        const red = Math.floor(Math.random() * (195 - 182 + 1)) + 182;
+        const x2 = Math.floor(Math.random() * (190 - 180 + 1)) + 180;
+        const x4 = Math.floor(Math.random() * (192 - 182 + 1)) + 182;
+        const sniper = Math.floor(Math.random() * (150 - 130 + 1)) + 130;
