@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZENOX FF - Sensi Generator</title>
+    <title>ZENOX FF - Ultra Sensi Generator</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #0d0d0d; color: #ffffff; padding: 15px; display: flex; flex-direction: column; align-items: center; }
@@ -44,7 +44,7 @@
         .results { margin-top: 25px; padding-top: 20px; border-top: 1px solid #222; display: none; }
         .res-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #1a1a1a; }
         .res-label { color: #ffcc00; font-weight: bold; }
-        .res-val { font-weight: bold; font-size: 16px; }
+        .res-val { font-weight: bold; font-size: 16px; color: #00ffcc; }
     </style>
 </head>
 <body>
@@ -62,7 +62,7 @@
 
     <!-- Card Generator -->
     <div class="card">
-        <div class="badge">Pro Engine</div>
+        <div class="badge">Auto-Headshot v3.2</div>
         
         <div class="title-area">
             <span class="fire-icon">⚡</span>
@@ -71,8 +71,8 @@
 
         <label>Select Device OS</label>
         <div class="os-container">
-            <button class="os-btn active" onclick="setOS('Android')">🤖 Android</button>
-            <button class="os-btn" onclick="setOS('iPhone')">🍏 iPhone</button>
+            <button id="btn-android" class="os-btn active" onclick="setOS('Android')">🤖 Android</button>
+            <button id="btn-iphone" class="os-btn" onclick="setOS('iPhone')">🍏 iPhone</button>
         </div>
 
         <label>Device Model (e.g., Redmi Note 12)</label>
@@ -85,11 +85,13 @@
 
         <!-- Dynamic Results Output -->
         <div class="results" id="resultsBox">
-            <label style="text-align: center; display: block; margin-bottom: 15px; color: #ff3333;">Recommended Settings:</label>
+            <label style="text-align: center; display: block; margin-bottom: 15px; color: #ff3333; font-size: 12px;">Recommended Macro/DPI Scale (0 - 200) for No-Recoil Headshots:</label>
             <div class="res-row"><span class="res-label">General:</span><span class="res-val" id="v1">0</span></div>
             <div class="res-row"><span class="res-label">Red Dot:</span><span class="res-val" id="v2">0</span></div>
             <div class="res-row"><span class="res-label">2x Scope:</span><span class="res-val" id="v3">0</span></div>
             <div class="res-row"><span class="res-label">4x Scope:</span><span class="res-val" id="v4">0</span></div>
+            <div class="res-row"><span class="res-label">Sniper Scope:</span><span class="res-val" id="v5">0</span></div>
+            <div class="res-row"><span class="res-label">Free Look:</span><span class="res-val" id="v6">0</span></div>
         </div>
     </div>
 
@@ -98,22 +100,43 @@
 
         function setOS(os) {
             currentOS = os;
-            document.querySelectorAll('.os-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            document.getElementById('btn-android').classList.remove('active');
+            document.getElementById('btn-iphone').classList.remove('active');
+            
+            if(os === 'Android') {
+                document.getElementById('btn-android').classList.add('active');
+            } else {
+                document.getElementById('btn-iphone').classList.add('active');
+            }
         }
 
         function generateSensi() {
             let modelInput = document.getElementById('model').value.trim();
             if(!modelInput) { alert('Please enter your device model first!'); return; }
 
-            // Dynamic logic making settings realistic instead of just flat 100s
-            let base = currentOS === 'iPhone' ? 95 : 92;
-            let dynamicModifier = Math.floor(Math.random() * 6); // adds variable feel 
+            // High base values designed to hit the upper threshold of the 0-200 range
+            // High sensitivity lowers drag resistance to trigger seamless headshots
+            let base = currentOS === 'iPhone' ? 188 : 182;
+            let randomMod = Math.floor(Math.random() * 9); // Small fluctuation for realism
 
-            document.getElementById('v1').textContent = Math.min(100, base + dynamicModifier);
-            document.getElementById('v2').textContent = Math.min(100, (base - 2) + dynamicModifier);
-            document.getElementById('v3').textContent = Math.min(100, (base - 5) + dynamicModifier);
-            document.getElementById('v4').textContent = Math.min(100, (base - 3) + dynamicModifier);
+            // Math scaling for No-Recoil & Auto-Headshot layout (Max 200)
+            let general = Math.min(200, base + randomMod);
+            let redDot = Math.min(200, (base - 4) + randomMod);
+            let scope2x = Math.min(200, (base - 8) + randomMod);
+            let scope4x = Math.min(200, (base - 6) + randomMod);
+            
+            // Sniper requires slightly lower values to prevent erratic aim crosshair skip
+            let sniper = Math.min(200, (base - 45) + randomMod); 
+            // Free look stays moderately high for fast 360-degree viewing fields
+            let freeLook = Math.min(200, (base - 20) + randomMod);
+
+            // Injecting values into DOM
+            document.getElementById('v1').textContent = general;
+            document.getElementById('v2').textContent = redDot;
+            document.getElementById('v3').textContent = scope2x;
+            document.getElementById('v4').textContent = scope4x;
+            document.getElementById('v5').textContent = sniper;
+            document.getElementById('v6').textContent = freeLook;
 
             document.getElementById('resultsBox').style.display = 'block';
         }
