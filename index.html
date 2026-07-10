@@ -45,6 +45,15 @@
         .res-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #1a1a1a; }
         .res-label { color: #ffcc00; font-weight: bold; }
         .res-val { font-weight: bold; font-size: 16px; color: #00ffcc; }
+
+        /* Range Highlight Containers */
+        .range-card { background-color: #1a1a1a; border-left: 3px solid #ff3333; padding: 10px; border-radius: 4px; margin-bottom: 12px; }
+        .range-card.mid { border-left-color: #ff9900; }
+        .range-card.long { border-left-color: #00ffcc; }
+        .range-tag { font-size: 11px; font-weight: bold; text-transform: uppercase; color: #ff3333; margin-bottom: 2px; }
+        .range-card.mid .range-tag { color: #ff9900; }
+        .range-card.long .range-tag { color: #00ffcc; }
+        .range-info { font-size: 11px; color: #aaa; line-height: 1.3; }
     </style>
 </head>
 <body>
@@ -85,7 +94,24 @@
 
         <!-- Dynamic Results Output -->
         <div class="results" id="resultsBox">
-            <label style="text-align: center; display: block; margin-bottom: 15px; color: #ff3333; font-size: 12px;">Recommended Macro/DPI Scale (0 - 200) for No-Recoil Headshots:</label>
+            <label style="text-align: center; display: block; margin-bottom: 15px; color: #ff3333; font-size: 12px; font-weight: bold;">
+                DYNAMIC RANGE AUTO-AIM MATRIX (0 - 200)
+            </label>
+
+            <!-- Combat Profiles -->
+            <div class="range-card">
+                <div class="range-tag">💥 Close-Range Auto-Aim Profile</div>
+                <div class="range-info">Bypasses body-lock friction. Requires sharp, rapid upward fire-button drags.</div>
+            </div>
+            <div class="range-card mid">
+                <div class="range-tag">🎯 Mid-Range Steady Tracking</div>
+                <div class="range-info">Locks horizontally onto moving targets. Use moderate, smooth upward drag speed.</div>
+            </div>
+            <div class="range-card long">
+                <div class="range-tag">🔭 Long-Range Zero-Drift Matrix</div>
+                <div class="range-info">Stabilises pixel-skipping over distances. Use gentle, slight upward fire-button pressure.</div>
+            </div>
+
             <div class="res-row"><span class="res-label">General:</span><span class="res-val" id="v1">0</span></div>
             <div class="res-row"><span class="res-label">Red Dot:</span><span class="res-val" id="v2">0</span></div>
             <div class="res-row"><span class="res-label">2x Scope:</span><span class="res-val" id="v3">0</span></div>
@@ -112,23 +138,28 @@
 
         function generateSensi() {
             let modelInput = document.getElementById('model').value.trim();
+            let ageInput = parseInt(document.getElementById('age').value) || 0;
+
             if(!modelInput) { alert('Please enter your device model first!'); return; }
 
             // High base values designed to hit the upper threshold of the 0-200 range
-            // High sensitivity lowers drag resistance to trigger seamless headshots
-            let base = currentOS === 'iPhone' ? 188 : 182;
-            let randomMod = Math.floor(Math.random() * 9); // Small fluctuation for realism
+            // Includes a small multiplier boost for older touch digitisers
+            let ageBoost = ageInput > 1 ? (ageInput * 3) : 4;
+            let base = currentOS === 'iPhone' ? (188 + ageBoost) : (182 + ageBoost);
+            let randomMod = Math.floor(Math.random() * 6);
 
-            // Math scaling for No-Recoil & Auto-Headshot layout (Max 200)
+            // Close Range Profile (Maximum sensitivity to rapidly break the game's default torso-lock)
             let general = Math.min(200, base + randomMod);
-            let redDot = Math.min(200, (base - 4) + randomMod);
-            let scope2x = Math.min(200, (base - 8) + randomMod);
-            let scope4x = Math.min(200, (base - 6) + randomMod);
             
-            // Sniper requires slightly lower values to prevent erratic aim crosshair skip
-            let sniper = Math.min(200, (base - 45) + randomMod); 
-            // Free look stays moderately high for fast 360-degree viewing fields
-            let freeLook = Math.min(200, (base - 20) + randomMod);
+            // Mid Range Profile (Smooth tracking alignment without overshooting moving targets)
+            let redDot = Math.min(200, (base - 2) + randomMod);
+            let scope2x = Math.min(200, (base - 4) + randomMod);
+            
+            // Long Range Profile (Calculated with precise stabilizers to eliminate pixel skipping)
+            let scope4x = Math.min(200, (base - 3) + randomMod);
+            let sniper = Math.min(200, (base - 38) + randomMod); 
+            
+            let freeLook = Math.min(200, (base - 12) + randomMod);
 
             // Injecting values into DOM
             document.getElementById('v1').textContent = general;
