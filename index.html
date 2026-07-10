@@ -3,46 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Fire Sensitivity Generator</title>
+    <title>ZENOX FF - Sensi Generator</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #121212; color: white; text-align: center; padding: 20px; }
-        .box { background: #1e1e1e; padding: 20px; border-radius: 8px; display: inline-block; margin-top: 20px; }
-        input, button { padding: 10px; margin: 10px; border-radius: 4px; border: none; }
-        button { background-color: #ff4500; color: white; cursor: pointer; font-weight: bold; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0d0d0d; color: #ffffff; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        
+        /* Top Banner */
+        .banner { background: linear-gradient(90deg, #ff3333, #b30000); width: 100%; text-align: center; padding: 10px; font-weight: bold; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; border-radius: 4px; }
+        .banner a { color: #fff; text-decoration: underline; margin-left: 10px; }
+        
+        /* Logo Header */
+        .header { width: 100%; max-width: 450px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .logo { font-size: 28px; font-weight: 900; color: #ff3333; letter-spacing: 2px; }
+        .menu-icon { font-size: 24px; cursor: pointer; }
+        
+        /* Main Container */
+        .card { background-color: #141414; border: 1px solid #222; border-radius: 16px; padding: 25px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); position: relative; }
+        .badge { background: linear-gradient(90deg, #ffcc00, #ff9900); color: #000; padding: 4px 20px; font-size: 11px; font-weight: bold; text-transform: uppercase; border-radius: 20px; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); }
+        
+        /* Form Styling */
+        .title-area { display: flex; align-items: center; gap: 10px; margin-top: 10px; margin-bottom: 20px; justify-content: center; }
+        .title-area h2 { font-size: 22px; font-weight: 700; }
+        .fire-icon { color: #ff5500; font-size: 22px; }
+        
+        label { display: block; font-size: 11px; font-weight: bold; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+        
+        /* OS Buttons */
+        .os-container { display: flex; gap: 12px; margin-bottom: 20px; }
+        .os-btn { flex: 1; padding: 12px; border: 2px solid #222; background-color: #1a1a1a; color: #888; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
+        .os-btn.active { border-color: #ff3333; background-color: #ff3333; color: white; }
+        
+        /* Input Boxes */
+        input { width: 100%; padding: 14px; background-color: #1c1c1c; border: 1px solid #333; color: white; border-radius: 8px; margin-bottom: 20px; font-size: 14px; }
+        input:focus { border-color: #ff3333; outline: none; }
+        
+        /* Action Button */
+        .gen-btn { width: 100%; padding: 15px; background: linear-gradient(90deg, #ff3333, #ff5500); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255,51,51,0.3); }
+        
+        /* Results Section */
+        .results { margin-top: 25px; padding-top: 20px; border-top: 1px solid #222; display: none; }
+        .res-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #1a1a1a; }
+        .res-label { color: #ffcc00; font-weight: bold; }
+        .res-val { font-weight: bold; font-size: 16px; }
     </style>
 </head>
 <body>
 
-    <h1>Free Fire Sensi Generator</h1>
-    <div class="box">
-        <input type="text" id="device" placeholder="Enter Device Name (e.g., Poco X3)">
-        <input type="number" id="dpi" placeholder="Enter DPI (e.g., 400)">
-        <br>
-        <button onclick="generateSensi()">Generate Perfect Sensi</button>
+    <!-- Top Promo Banner -->
+    <div class="banner">
+        🎉 ZENOX SENSI 100K DOWNLOADS CELEBRATION! <a href="#">GET REWARDS ⚡</a>
+    </div>
+
+    <!-- Header Block -->
+    <div class="header">
+        <div class="logo">ZENOX FF</div>
+        <div class="menu-icon">☰</div>
+    </div>
+
+    <!-- Card Generator -->
+    <div class="card">
+        <div class="badge">Pro Engine</div>
         
-        <div id="result" style="margin-top:20px; font-weight:bold; color:#ffcf40;"></div>
+        <div class="title-area">
+            <span class="fire-icon">⚡</span>
+            <h2>Sensi Generator</h2>
+        </div>
+
+        <label>Select Device OS</label>
+        <div class="os-container">
+            <button class="os-btn active" onclick="setOS('Android')">🤖 Android</button>
+            <button class="os-btn" onclick="setOS('iPhone')">🍏 iPhone</button>
+        </div>
+
+        <label>Device Model (e.g., Redmi Note 12)</label>
+        <input type="text" id="model" placeholder="Enter device model...">
+
+        <label>Device Age (In Years)</label>
+        <input type="number" id="age" placeholder="0 for new device...">
+
+        <button class="gen-btn" onclick="generateSensi()">Generate Perfect Sensi</button>
+
+        <!-- Dynamic Results Output -->
+        <div class="results" id="resultsBox">
+            <label style="text-align: center; display: block; margin-bottom: 15px; color: #ff3333;">Recommended Settings:</label>
+            <div class="res-row"><span class="res-label">General:</span><span class="res-val" id="v1">0</span></div>
+            <div class="res-row"><span class="res-label">Red Dot:</span><span class="res-val" id="v2">0</span></div>
+            <div class="res-row"><span class="res-label">2x Scope:</span><span class="res-val" id="v3">0</span></div>
+            <div class="res-row"><span class="res-label">4x Scope:</span><span class="res-val" id="v4">0</span></div>
+        </div>
     </div>
 
     <script>
+        let currentOS = 'Android';
+
+        function setOS(os) {
+            currentOS = os;
+            document.querySelectorAll('.os-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
         function generateSensi() {
-            let dpi = parseFloat(document.getElementById('dpi').value);
-            if (!dpi || dpi <= 0) {
-                document.getElementById('result').innerHTML = "Please enter a valid DPI.";
-                return;
-            }
-            
-            // Example custom mathematical formula for in-game slider output
-            let generalSensi = Math.min(100, Math.max(50, Math.round((800 / dpi) * 95)));
-            let redDot = Math.min(100, generalSensi + 5);
-            
-            document.getElementById('result').innerHTML = `
-                <p>Recommended Settings:</p>
-                <p>General: ${generalSensi}</p>
-                <p>Red Dot: ${redDot}</p>
-                <p>2x Scope: 100</p>
-                <p>4x Scope: 100</p>
-            `;
+            let modelInput = document.getElementById('model').value.trim();
+            if(!modelInput) { alert('Please enter your device model first!'); return; }
+
+            // Dynamic logic making settings realistic instead of just flat 100s
+            let base = currentOS === 'iPhone' ? 95 : 92;
+            let dynamicModifier = Math.floor(Math.random() * 6); // adds variable feel 
+
+            document.getElementById('v1').textContent = Math.min(100, base + dynamicModifier);
+            document.getElementById('v2').textContent = Math.min(100, (base - 2) + dynamicModifier);
+            document.getElementById('v3').textContent = Math.min(100, (base - 5) + dynamicModifier);
+            document.getElementById('v4').textContent = Math.min(100, (base - 3) + dynamicModifier);
+
+            document.getElementById('resultsBox').style.display = 'block';
         }
     </script>
 </body>
 </html>
+
