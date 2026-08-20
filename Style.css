@@ -1,0 +1,97 @@
+/* ==========================================================================
+   FX_VISION.AI — GLOBAL DESIGN SYSTEM CORE
+   ========================================================================== */
+
+:root {
+    --color-bg-base: #020617;       /* Deep slate/navy foundation background */
+    --color-border-dark: #1e293b;   /* Muted slate accent lines */
+    --color-accent-violet: #8b5cf6; /* Main AI system interactive branding color */
+    --color-accent-emerald: #34d399;/* Bullish/Target success state indicator */
+    --color-accent-rose: #fb7185;   /* Bearish/Risk invalidation error state */
+}
+
+/* Base Body Environment Styling Override */
+body {
+    background-color: var(--color-bg-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* ==========================================================================
+   INTERACTIVE USER-INTERFACE ACCENT SHADOWS (NEON EFFECTS)
+   ========================================================================== */
+
+/* Active configuration profile indicator blur glow */
+.glow-active {
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.25);
+    background-color: rgba(139, 92, 246, 0.1) !important;
+}
+
+/* Buy Matrix successful analysis confirmation engine glow */
+.glow-emerald {
+    box-shadow: 0 0 25px rgba(52, 211, 153, 0.15);
+}
+
+/* Sell Matrix analysis configuration engine glow */
+.glow-rose {
+    box-shadow: 0 0 25px rgba(251, 113, 133, 0.15);
+}
+
+/* ==========================================================================
+   TERMINAL TEXT TYPING SIMULATION EFFECTS
+   ========================================================================== */
+
+@keyframes textTyping {
+    from { 
+        opacity: 0; 
+        transform: translateY(3px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Applied dynamically by script.js when logging system steps */
+.log-entry {
+    animation: textTyping 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==========================================================================
+   CUSTOM COMPONENT OPTIMISATIONS & OVERRIDES
+   ========================================================================== */
+
+/* Custom Clean Scrollbar for the Diagnostic Terminal Output Area */
+#terminalLog::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+#terminalLog::-webkit-scrollbar-track {
+    background: #020617;
+    border-radius: 8px;
+}
+
+#terminalLog::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+#terminalLog::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+}
+
+/* Standardizing dropdown selection layout appearance across web layouts */
+select option {
+    background-color: #020617;
+    color: #e2e8f0;
+    padding: 12px;
+}
+
+/* Dynamic smooth rendering tweaks for scaling visual items */
+#previewContainer img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
