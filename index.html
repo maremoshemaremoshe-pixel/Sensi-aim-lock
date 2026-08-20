@@ -1,177 +1,128 @@
-
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZENOX FF - Ultra Sensi Generator</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0d0d0d; color: #ffffff; padding: 15px; display: flex; flex-direction: column; align-items: center; }
-        
-        /* Top Banner */
-        .banner { background: linear-gradient(90deg, #ff3333, #b30000); width: 100%; text-align: center; padding: 10px; font-weight: bold; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; border-radius: 4px; }
-        .banner a { color: #fff; text-decoration: underline; margin-left: 10px; }
-        
-        /* Logo Header */
-        .header { width: 100%; max-width: 450px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-        .logo { font-size: 28px; font-weight: 900; color: #ff3333; letter-spacing: 2px; }
-        .menu-icon { font-size: 24px; cursor: pointer; }
-        
-        /* Main Container */
-        .card { background-color: #141414; border: 1px solid #222; border-radius: 16px; padding: 25px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); position: relative; }
-        .badge { background: linear-gradient(90deg, #ffcc00, #ff9900); color: #000; padding: 4px 20px; font-size: 11px; font-weight: bold; text-transform: uppercase; border-radius: 20px; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); }
-        
-        /* Form Styling */
-        .title-area { display: flex; align-items: center; gap: 10px; margin-top: 10px; margin-bottom: 20px; justify-content: center; }
-        .title-area h2 { font-size: 22px; font-weight: 700; }
-        .fire-icon { color: #ff5500; font-size: 22px; }
-        
-        label { display: block; font-size: 11px; font-weight: bold; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
-        
-        /* OS Buttons */
-        .os-container { display: flex; gap: 12px; margin-bottom: 20px; }
-        .os-btn { flex: 1; padding: 12px; border: 2px solid #222; background-color: #1a1a1a; color: #888; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
-        .os-btn.active { border-color: #ff3333; background-color: #ff3333; color: white; }
-        
-        /* Input Boxes */
-        input { width: 100%; padding: 14px; background-color: #1c1c1c; border: 1px solid #333; color: white; border-radius: 8px; margin-bottom: 20px; font-size: 14px; }
-        input:focus { border-color: #ff3333; outline: none; }
-        
-        /* Action Button */
-        .gen-btn { width: 100%; padding: 15px; background: linear-gradient(90deg, #ff3333, #ff5500); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255,51,51,0.3); }
-        
-        /* Results Section */
-        .results { margin-top: 25px; padding-top: 20px; border-top: 1px solid #222; display: none; }
-        .res-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #1a1a1a; align-items: center; }
-        .res-label { color: #ffcc00; font-weight: bold; }
-        .res-val { font-weight: bold; font-size: 16px; color: #00ffcc; }
-
-        /* Range Highlight Containers */
-        .range-card { background-color: #1a1a1a; border-left: 3px solid #ff3333; padding: 10px; border-radius: 4px; margin-bottom: 12px; }
-        .range-card.mid { border-left-color: #ff9900; }
-        .range-card.long { border-left-color: #00ffcc; }
-        .range-tag { font-size: 11px; font-weight: bold; text-transform: uppercase; color: #ff3333; margin-bottom: 2px; }
-        .range-card.mid .range-tag { color: #ff9900; }
-        .range-card.long .range-tag { color: #00ffcc; }
-        .range-info { font-size: 11px; color: #aaa; line-height: 1.3; }
-
-        /* Custom styling for Hardware Settings split */
-        .hardware-box { background: #1a1a1a; border: 1px dashed #333; border-radius: 8px; padding: 12px; margin-bottom: 15px; }
-    </style>
+    <title>FX_VISION.AI | Advanced Forex Analysis</title>
+    <!-- Tailwind CSS CDN for structure -->
+    <script src="https://tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Font for sleek tech styling -->
+    <link href="https://googleapis.com" rel="stylesheet">
 </head>
-<body>
+<body class="text-slate-100 min-h-screen flex flex-col font-sans">
 
-    <!-- Top Promo Banner -->
-    <div class="banner">
-        🎉 ZENOX SENSI 100K DOWNLOADS CELEBRATION! <a href="#">GET REWARDS ⚡</a>
-    </div>
+    <!-- Glowing Top Accent Bar -->
+    <div class="h-1 bg-gradient-to-r from-cyan-500 via-violet-500 to-fuchsia-500 w-full"></div>
 
-    <!-- Header Block -->
-    <div class="header">
-        <div class="logo">ZENOX FF</div>
-        <div class="menu-icon">☰</div>
-    </div>
+    <!-- Header Navbar -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="h-8 w-8 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center font-bold text-white shadow-lg shadow-violet-500/20">👁️</div>
+                <span class="text-2xl font-black bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent tracking-tight">FX_VISION<span class="text-xs font-mono font-medium text-slate-500 ml-1">.AI</span></span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full font-semibold flex items-center gap-1.5 backdrop-blur-sm">
+                    <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span> SYSTEM ONLINE
+                </span>
+            </div>
+        </div>
+    </header>
 
-    <!-- Card Generator -->
-    <div class="card">
-        <div class="badge">Auto-Headshot v3.5</div>
+    <!-- Main Workspace -->
+    <main class="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 max-w-7xl mx-auto w-full">
         
-        <div class="title-area">
-            <span class="fire-icon">⚡</span>
-            <h2>Sensi Generator</h2>
-        </div>
-
-        <label>Select Device OS</label>
-        <div class="os-container">
-            <button id="btn-android" class="os-btn active" onclick="setOS('Android')">🤖 Android</button>
-            <button id="btn-iphone" class="os-btn" onclick="setOS('iPhone')">🍏 iPhone</button>
-        </div>
-
-        <label>Device Model (e.g., Redmi Note 12)</label>
-        <input type="text" id="model" placeholder="Enter device model...">
-
-        <label>Device Age (In Years)</label>
-        <input type="number" id="age" placeholder="0 for new device...">
-
-        <button class="gen-btn" onclick="generateSensi()">Generate Perfect Sensi</button>
-
-        <!-- Dynamic Results Output -->
-        <div class="results" id="resultsBox">
+        <!-- Left Column: Input and Parameters -->
+        <section class="lg:col-span-1 flex flex-col gap-6">
             
-            <label style="text-align: center; display: block; margin-bottom: 10px; color: #ff3333; font-size: 12px; font-weight: bold;">
-                HARDWARE MODIFICATIONS
-            </label>
-            <!-- Hardware Output Section -->
-            <div class="hardware-box">
-                <div class="res-row"><span class="res-label">🔥 Fire Button Size:</span><span class="res-val" id="v_fire" style="color: #ff9900;">0</span></div>
-                <div class="res-row"><span class="res-label">⚙️ System DPI / Scale:</span><span class="res-val" id="v_dpi" style="color: #ffcc00;">0</span></div>
-                <div class="res-row"><span class="res-label">🎯 Headshot Accuracy Estimate:</span><span class="res-val" id="v_boost" style="color: #00ffcc;">0</span></div>
+            <!-- Colorful Dropzone Card -->
+            <div class="bg-slate-900/40 border border-slate-800 rounded-2xl p-6 relative overflow-hidden backdrop-blur-sm group flex flex-col justify-between min-h-[320px]">
+                <div class="absolute -top-24 -left-24 h-48 w-48 bg-violet-600/10 rounded-full blur-3xl pointer-events-none group-hover:bg-violet-600/20 transition-all duration-500"></div>
+                <div class="absolute -bottom-24 -right-24 h-48 w-48 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none group-hover:bg-cyan-600/20 transition-all duration-500"></div>
+                
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 z-10 flex items-center gap-2">
+                    <span class="p-1 rounded bg-slate-800 text-slate-300">01</span> Visual Chart Data
+                </h3>
+
+                <!-- Upload Drag Area -->
+                <div id="dropzone" class="flex-1 border-2 border-dashed border-slate-700/60 hover:border-violet-500/50 rounded-xl flex flex-col items-center justify-center p-6 transition-all duration-300 relative group/drop bg-slate-950/40 cursor-pointer">
+                    <input type="file" id="chartUpload" class="absolute inset-0 opacity-0 cursor-pointer z-20" accept="image/*" />
+                    
+                    <div id="uploadPrompt" class="text-center pointer-events-none transition-all duration-300">
+                        <div class="mx-auto h-14 w-14 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center mb-4 group-hover/drop:scale-110 group-hover/drop:border-violet-500/30 group-hover/drop:bg-violet-950/20 text-2xl transition-all duration-300">📸</div>
+                        <p class="font-bold text-slate-200 group-hover/drop:text-violet-400 transition-colors">Upload Chart Image</p>
+                        <p class="text-xs text-slate-500 mt-1 max-w-[200px] mx-auto">Drop screenshot, tap to browse, or paste image directly</p>
+                    </div>
+
+                    <!-- Hidden Image Preview Wrapper -->
+                    <div id="previewContainer" class="hidden absolute inset-2 rounded-lg overflow-hidden bg-slate-950 flex items-center justify-center z-10 border border-slate-800">
+                        <img id="imagePreview" src="" alt="Forex Chart Preview" class="w-full h-full object-cover">
+                        <button id="removeImageBtn" class="absolute top-2 right-2 bg-slate-950/80 hover:bg-rose-950/90 text-slate-400 hover:text-rose-400 border border-slate-800 p-2 rounded-lg text-xs font-bold transition-all z-30 backdrop-blur-sm">✕ Remove</button>
+                    </div>
+                </div>
             </div>
 
-            <label style="text-align: center; display: block; margin-bottom: 15px; color: #ff3333; font-size: 12px; font-weight: bold;">
-                DYNAMIC RANGE AUTO-AIM MATRIX (0 - 200)
-            </label>
+            <!-- Parameters Card -->
+            <div class="bg-slate-900/40 border border-slate-800 rounded-2xl p-6 relative overflow-hidden backdrop-blur-sm">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
+                    <span class="p-1 rounded bg-slate-800 text-slate-300">02</span> Router Environment
+                </h3>
+                
+                <!-- Broker Selection with dynamic neon accent markers -->
+                <div class="mb-4">
+                    <label class="block text-xs font-semibold text-slate-400 mb-2">TARGET LIQUIDITY PROVIDER (BROKER)</label>
+                    <div class="relative">
+                        <select id="brokerSelect" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 appearance-none font-medium cursor-pointer transition-all">
+                            <option value="exness">Exness — ECN Ultra-Low Spread</option>
+                            <option value="avatrade">AvaTrade — Dedicated Fixed Spread</option>
+                            <option value="xm">XM Global — Standard execution</option>
+                            <option value="pepperstone">Pepperstone — Razor Raw Liquidity</option>
+                            <option value="icmarkets">IC Markets — True ECN Server</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">▼</div>
+                    </div>
+                </div>
 
-            <!-- Combat Profiles -->
-            <div class="range-card">
-                <div class="range-tag">💥 Close-Range Auto-Aim Profile</div>
-                <div class="range-info">Bypasses body-lock friction. Requires sharp, rapid upward fire-button drags.</div>
+                <!-- Risk Profiles -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-2">RISK EVALUATION COEFFICIENT</label>
+                    <div class="grid grid-cols-3 gap-2" id="riskButtonGroup">
+                        <button type="button" data-risk="conservative" class="risk-btn border border-slate-800 bg-slate-950/60 py-2.5 rounded-xl text-xs font-bold text-slate-400 hover:border-slate-700 transition-all">Conservative</button>
+                        <button type="button" data-risk="moderate" class="risk-btn border-2 border-violet-500 bg-violet-600/10 py-2.5 rounded-xl text-xs font-bold text-violet-400 glow-active transition-all">Moderate</button>
+                        <button type="button" data-risk="aggressive" class="risk-btn border border-slate-800 bg-slate-950/60 py-2.5 rounded-xl text-xs font-bold text-slate-400 hover:border-slate-700 transition-all">Aggressive</button>
+                    </div>
+                </div>
             </div>
-            <div class="range-card mid">
-                <div class="range-tag">🎯 Mid-Range Steady Tracking</div>
-                <div class="range-info">Locks horizontally onto moving targets. Use moderate, smooth upward drag speed.</div>
-            </div>
-            <div class="range-card long">
-                <div class="range-tag">🔭 Long-Range Zero-Drift Matrix</div>
-                <div class="range-info">Stabilises pixel-skipping over distances. Use gentle, slight upward fire-button pressure.</div>
-            </div>
+        </section>
 
-            <div class="res-row"><span class="res-label">General:</span><span class="res-val" id="v1">0</span></div>
-            <div class="res-row"><span class="res-label">Red Dot:</span><span class="res-val" id="v2">0</span></div>
-            <div class="res-row"><span class="res-label">2x Scope:</span><span class="res-val" id="v3">0</span></div>
-            <div class="res-row"><span class="res-label">4x Scope:</span><span class="res-val" id="v4">0</span></div>
-            <div class="res-row"><span class="res-label">Sniper Scope:</span><span class="res-val" id="v5">0</span></div>
-            <div class="res-row"><span class="res-label">Free Look:</span><span class="res-val" id="v6">0</span></div>
-        </div>
-    </div>
-
-    <script>
-        let currentOS = 'Android';
-
-        function setOS(os) {
-            currentOS = os;
-            document.getElementById('btn-android').classList.remove('active');
-            document.getElementById('btn-iphone').classList.remove('active');
+        <!-- Right Column: AI Analytical Terminal Dashboard -->
+        <section class="lg:col-span-2 bg-slate-900/40 border border-slate-800 rounded-2xl p-6 flex flex-col min-h-[500px] backdrop-blur-sm relative overflow-hidden">
             
-            if(os === 'Android') {
-                document.getElementById('btn-android').classList.add('active');
-            } else {
-                document.getElementById('btn-iphone').classList.add('active');
-            }
-        }
+            <div class="border-b border-slate-800/80 pb-4 mb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                    <span class="relative flex h-2 w-2">
+                        <span id="terminalPulse" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-500 opacity-75"></span>
+                        <span id="terminalDot" class="relative inline-flex rounded-full h-2 w-2 bg-slate-500"></span>
+                    </span>
+                    <h2 class="font-bold text-lg text-slate-100 flex items-center gap-2">AI Structural Analysis Core</h2>
+                </div>
+                <!-- Dynamic Header Output -->
+                <div class="flex gap-2 items-center">
+                    <span id="detectedPair" class="text-xs bg-slate-950 border border-slate-800 text-slate-400 font-mono px-3 py-1.5 rounded-lg tracking-wider font-semibold">PAIR: UNDEFINED</span>
+                    <span id="detectedTimeframe" class="text-xs bg-slate-950 border border-slate-800 text-slate-400 font-mono px-3 py-1.5 rounded-lg font-semibold">TF: --</span>
+                </div>
+            </div>
 
-        function generateSensi() {
-            let modelInput = document.getElementById('model').value.trim();
-            let ageInput = parseInt(document.getElementById('age').value) || 0;
-
-            if(!modelInput) { alert('Please enter your device model first!'); return; }
-
-            // Enhanced algorithm to target high-tier headshot performance
-            let ageBoost = ageInput > 1 ? (ageInput * 4) : 6;
-            let base = currentOS === 'iPhone' ? (190 + ageBoost) : (185 + ageBoost);
-            let randomMod = Math.floor(Math.random() * 4);
-
-            // General slider handles the main screen acceleration needed to break torso auto-aim
-            let general = Math.min(200, base + randomMod);
-            let redDot = Math.min(200, (base - 1) + randomMod);
-            let scope2x = Math.min(200, (base - 3) + randomMod);
-            let scope4x = Math.min(200, (base - 2) + randomMod);
-            let sniper = Math.min(200, (base - 35) + randomMod); 
-            let freeLook = Math.min(200, (base - 10) + randomMod);
-
-            let fireButtonSize;
-            let dpiDisplay;
-            let accuracyBoost;
-
-            if (currentOS === 'Android') {
+            <!-- Quantitative Output Matrix Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <!-- Direction block -->
+                <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl relative overflow-hidden transition-all duration-300" id="directionCard">
+                    <span class="text-xs text-slate-500 block font-bold tracking-wider uppercase mb-1">DIRECTIONAL MATRIX</span>
+                    <span id="outputDirection" class="text-xl font-black text-slate-400 tracking-wide uppercase transition-all duration-300">AWAITING SCAN</span>
+                </div>
+                <!-- Entry level block -->
+                <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl transition-all duration-300" id="entryCard">
+                    <span class="text-xs text-slate-500 block font-bold tracking-wider uppercase mb-1">OPTIMAL ENTRY VALUE</span>
+http://localhost:3002
